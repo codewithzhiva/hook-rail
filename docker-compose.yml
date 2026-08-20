@@ -1,0 +1,11 @@
+services:
+  api:
+    build: .
+    environment: {JOURNAL_PATH: "/data/hookrail.wal", WORKERS: "8"}
+    volumes: [hook-data:/data]
+    ports: ["8082:8080"]
+  web:
+    build: ./web
+    ports: ["8083:80"]
+    depends_on: [api]
+volumes: {hook-data: {}}
